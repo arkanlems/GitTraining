@@ -1,3 +1,4 @@
+package org.example.Diego_Molina.HomeWork3;
 import java.util.Scanner;
 
 public class Utils {

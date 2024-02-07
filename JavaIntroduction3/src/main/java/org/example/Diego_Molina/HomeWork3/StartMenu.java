@@ -1,3 +1,5 @@
+package org.example.Diego_Molina.HomeWork3;
+
 public class StartMenu {
 
     public static void showOptions(){

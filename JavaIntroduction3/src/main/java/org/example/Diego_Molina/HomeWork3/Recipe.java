@@ -1,3 +1,5 @@
+package org.example.Diego_Molina.HomeWork3;
+
 public class Recipe {
     private int id;
     private String name;
