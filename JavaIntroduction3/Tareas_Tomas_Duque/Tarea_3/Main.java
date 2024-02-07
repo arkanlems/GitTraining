@@ -1,4 +1,4 @@
-package org.example;
+package Dia_4.GitTraining.JavaIntroduction3.Tareas_Tomas_Duque.Tarea_3;
 
 import Dia_3.Recipe;
 
@@ -16,7 +16,7 @@ public class Main {
             System.out.println("Bienvenido al menú del restaurante!");
             System.out.println("¿Qué deseas hacer? \n1) Añadir receta \n2) Reemplazar receta \n3) Mostrar la cantidad de recetas \n4) Mostrar las recetas \n5) Salir");
             option = scan.nextInt();
-            scan.nextLine(); // Consume el salto de línea
+            scan.nextLine();
 
             switch (option) {
                 case 1:
@@ -30,7 +30,7 @@ public class Main {
                 case 2:
                     System.out.println("Ingrese el número de la receta que desea reemplazar:");
                     int index = scan.nextInt() - 1;
-                    scan.nextLine(); // Consume el salto de línea
+                    scan.nextLine();
                     if (index >= 0 && index < recipes.size()) {
                         System.out.println("Ingrese el nuevo nombre de la receta:");
                         String newName = scan.nextLine();
