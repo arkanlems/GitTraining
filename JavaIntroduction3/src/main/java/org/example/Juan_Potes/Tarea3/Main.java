@@ -1,3 +1,5 @@
+package org.example.Juan_Potes.Tarea3;
+
 public class Main {
     public static void main(String[] args) {
         RestaurantMenu menu = new RestaurantMenu();

@@ -1,3 +1,4 @@
+package org.example.Juan_Potes.Tarea3;
 public class Recipe {
     private String name;
     private double price;
