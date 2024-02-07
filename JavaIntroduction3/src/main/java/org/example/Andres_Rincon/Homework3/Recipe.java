@@ -1,4 +1,4 @@
-package org.example.Andres_Rincon;
+package org.example.Andres_Rincon.Homework3;
 
 public class Recipe {
     private String name;
