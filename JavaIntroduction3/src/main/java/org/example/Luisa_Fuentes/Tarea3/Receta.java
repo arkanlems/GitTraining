@@ -1,4 +1,4 @@
-package org.example.Luisa_Fuentes;
+package org.example.Luisa_Fuentes.Tarea3;
 
 public class Receta {
     private String nombre;
