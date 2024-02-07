@@ -25,13 +25,7 @@ public class Main {
         estudiantesLista.add("daniel");
         estudiantesLista.add("sebastian");
 
-        int index = estudiantesLista.indexOf("maria");
-        estudiantesLista.remove(index);
-        List.copyOf()
-        estudiantesLista.subList(0,estudiantesLista.size()-1);
-        for(Student s: estudiantesLista){
-            System.out.println(s.getName());
-        }
+       
 
         /*
 
