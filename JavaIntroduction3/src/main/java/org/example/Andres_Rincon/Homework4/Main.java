@@ -18,21 +18,24 @@ public class Main {
         System.out.println("********** Adding money *********");
         bank.addMoney("12321321", 100.0);
         bank.addMoney( realAccountNumber, -100.0);
-        bank.addMoney(realAccountNumber, 100.0);
+        bank.addMoney(realAccountNumber, 5000.0);
 
         System.out.println("********** Withdrawing money *********");
         bank.withdraw("12345", 100.0);
         bank.withdraw(realAccountNumber, -100.0);
-        bank.withdraw(realAccountNumber, 200.0);
-        bank.withdraw(realAccountNumber, 50.0);
+        bank.withdraw(realAccountNumber, 4000.0);
 
 
         System.out.println("********** Transferring money *********");
         bank.addNewAccount("janesmith");
         String otherAccountNumber = bank.getAccountsDirectoryPerUsername().get("janesmith").get(0).getAccountNumber();
         bank.transfer(realAccountNumber, otherAccountNumber, 50.0);
+
+
         bank.closeSession();
 
+        System.out.println("********** Tax Revenue *********");
+        System.out.println(bank.getTaxRevenue());
 
     }
 }

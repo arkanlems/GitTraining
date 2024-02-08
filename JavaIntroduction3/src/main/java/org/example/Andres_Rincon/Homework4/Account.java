@@ -8,7 +8,7 @@ public class Account {
     private final Client owner;
     private String accountNumber;
     private Date openingDate;
-    private Double balance;
+    private double balance;
 
     public Account(Client owner) {
         this.owner = owner;
@@ -22,7 +22,7 @@ public class Account {
         long randomNumber = Math.abs(uuid.getMostSignificantBits() % 10_000_000_000L);
         return String.valueOf(randomNumber);
     }
-    public void addMoney(Double amount) {
+    public void addMoney(double amount) {
         if(amount > 0) {
             balance += amount;
             System.out.println("Money added.");
@@ -32,17 +32,21 @@ public class Account {
         }
     }
 
-    public void withdraw(Double amount) {
-        if(amount <= 0) {
-            throw new RuntimeException("Amount must be positive.");
-        }
-        if(balance >= amount) {
+    public void withdraw(double amount) {
+        if(withdrawalAmountChecked(amount)) {
             balance -= amount;
             System.out.println("Money withdrawn.");
         }
-        else {
+    }
+
+    public boolean withdrawalAmountChecked(double amount) {
+        if(amount <= 0) {
+            throw new RuntimeException("Amount must be positive.");
+        }
+        if(balance < amount) {
             throw new RuntimeException("Insufficient funds.");
         }
+        return true;
     }
 
     public String getAccountNumber() {
@@ -61,11 +65,11 @@ public class Account {
         this.openingDate = openingDate;
     }
 
-    public Double getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

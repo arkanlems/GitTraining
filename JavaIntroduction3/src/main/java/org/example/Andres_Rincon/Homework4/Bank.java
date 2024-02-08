@@ -11,12 +11,19 @@ public class Bank {
     private Map<String, List<Account>> accountsDirectoryPerUsername;
     private Map<String, Account> accountsDirectoryPerAccountNumber;
     private Session session;
+    private double taxRevenue;
+
+    private final double AMOUNT_FOR_TAXING_THRESHOLD = 1000.0;
+    private final double WITHDRAWAL_TAX = 200.0;
+    private final double WITHDRAWAL_TAX_PERCENTAGE = 0.15;
+    private final double TRANSFERRING_TASK = 100.0;
 
     public Bank(String name) {
         this.name = name;
         clients = new HashMap<>();
         accountsDirectoryPerUsername = new HashMap<>();
         accountsDirectoryPerAccountNumber = new HashMap<>();
+        taxRevenue = 0.0;
     }
 
     public void addClient(String name, String username, String password) {
@@ -57,7 +64,7 @@ public class Bank {
         session = null;
     }
 
-    public void addMoney(String accountNumber, Double amount) {
+    public void addMoney(String accountNumber, double amount) {
         try {
             if(session != null) {
                 Account account = getAccountChecked(session.getUsername(), accountNumber);
@@ -69,11 +76,15 @@ public class Bank {
         }
     }
 
-    public void withdraw(String accountNumber, Double amount) {
+    public void withdraw(String accountNumber, double amount) {
         try {
             if(session != null) {
                 Account account = getAccountChecked(session.getUsername(), accountNumber);
-                account.withdraw(amount);
+                account.withdrawalAmountChecked(amount); // check original amount firstly
+                double finalAmount = getWithdrawalTaxesChecked(account, amount);
+                if(finalAmount > 0) {
+                    account.withdraw(amount);
+                }
             }
         }
         catch (RuntimeException e){
@@ -82,6 +93,25 @@ public class Bank {
 
     }
 
+    private double getWithdrawalTaxesChecked(Account account, double amount) {
+        double finalWithdrawalAmount;
+        double taxAmount;
+        if(amount < AMOUNT_FOR_TAXING_THRESHOLD) {
+            taxAmount = WITHDRAWAL_TAX;
+        }
+        else {
+            taxAmount =  WITHDRAWAL_TAX + (amount* WITHDRAWAL_TAX_PERCENTAGE);
+        }
+        finalWithdrawalAmount = amount + taxAmount;
+        if(account.withdrawalAmountChecked(finalWithdrawalAmount)) {
+            taxRevenue += taxAmount;
+            return finalWithdrawalAmount;
+        }
+        else {
+            return 0;
+        }
+
+    }
 
     private Account getAccountChecked(String username, String accountNumber) {
         for(Account account : accountsDirectoryPerUsername.get(username)) {
@@ -96,7 +126,7 @@ public class Bank {
         return account.getOwner().getUsername().equals(username);
     }
 
-    public void transfer(String originAccountNumber, String receiverAccountNumber, Double amount) {
+    public void transfer(String originAccountNumber, String receiverAccountNumber, double amount) {
         Account originAccount = accountsDirectoryPerAccountNumber.get(originAccountNumber);
         Account receiverAccount = accountsDirectoryPerAccountNumber.get(receiverAccountNumber);
         try {
@@ -139,5 +169,7 @@ public class Bank {
         return accountsDirectoryPerUsername;
     }
 
-
+    public double getTaxRevenue() {
+        return taxRevenue;
+    }
 }
