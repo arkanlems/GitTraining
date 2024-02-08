@@ -16,7 +16,7 @@ public class Bank {
     private final double AMOUNT_FOR_TAXING_THRESHOLD = 1000.0;
     private final double WITHDRAWAL_TAX = 200.0;
     private final double WITHDRAWAL_TAX_PERCENTAGE = 0.15;
-    private final double TRANSFERRING_TASK = 100.0;
+    private final double TRANSFERRING_TAX = 100.0;
 
     public Bank(String name) {
         this.name = name;
@@ -83,7 +83,7 @@ public class Bank {
                 account.withdrawalAmountChecked(amount); // check original amount firstly
                 double finalAmount = getWithdrawalTaxesChecked(account, amount);
                 if(finalAmount > 0) {
-                    account.withdraw(amount);
+                    account.withdraw(finalAmount);
                 }
             }
         }
@@ -130,13 +130,28 @@ public class Bank {
         Account originAccount = accountsDirectoryPerAccountNumber.get(originAccountNumber);
         Account receiverAccount = accountsDirectoryPerAccountNumber.get(receiverAccountNumber);
         try {
-            originAccount.withdraw(amount);
-            receiverAccount.addMoney(amount);
+            if(session != null) {
+                originAccount.withdrawalAmountChecked(amount); // check original amount firstly
+                double finalAmount = getTransferTaxesChecked(originAccount, amount);
+                if(finalAmount > 0) {
+                    originAccount.withdraw(finalAmount);
+                    receiverAccount.addMoney(amount);
+                }
+            }
             System.out.println("Transferred with success.");
         }
         catch(RuntimeException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private double getTransferTaxesChecked(Account account, double amount) {
+        double finalTransferAmount = amount + TRANSFERRING_TAX;
+        if(account.withdrawalAmountChecked(finalTransferAmount)) {
+            taxRevenue += TRANSFERRING_TAX;
+            return finalTransferAmount;
+        }
+        return finalTransferAmount;
     }
 
     public Client getClient(String username) {
@@ -167,6 +182,10 @@ public class Bank {
 
     public Map<String, List<Account>> getAccountsDirectoryPerUsername() {
         return accountsDirectoryPerUsername;
+    }
+
+    public Map<String, Account> getAccountsDirectoryPerAccountNumber() {
+        return accountsDirectoryPerAccountNumber;
     }
 
     public double getTaxRevenue() {

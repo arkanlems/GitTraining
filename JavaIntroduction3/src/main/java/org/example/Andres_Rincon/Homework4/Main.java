@@ -36,6 +36,5 @@ public class Main {
 
         System.out.println("********** Tax Revenue *********");
         System.out.println(bank.getTaxRevenue());
-
     }
 }
