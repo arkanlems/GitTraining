@@ -8,18 +8,21 @@ import java.util.Map;
 public class Bank {
     private String name;
     private Map<String, Client> clients;
-    private Map<String, List<Account>> accountsDirectory;
+    private Map<String, List<Account>> accountsDirectoryPerUsername;
+    private Map<String, Account> accountsDirectoryPerAccountNumber;
+    private Session session;
 
     public Bank(String name) {
         this.name = name;
         clients = new HashMap<>();
-        accountsDirectory = new HashMap<>();
+        accountsDirectoryPerUsername = new HashMap<>();
+        accountsDirectoryPerAccountNumber = new HashMap<>();
     }
 
     public void addClient(String name, String username, String password) {
         if(getClient(username) == null) {
             clients.put(username, new Client(name, username, password));
-            accountsDirectory.put(username, new ArrayList<>());
+            accountsDirectoryPerUsername.put(username, new ArrayList<>());
         }
         else {
             System.out.println("Username has already been taken");
@@ -27,32 +30,20 @@ public class Bank {
     }
 
     public void addNewAccount(String username) {
-        accountsDirectory.get(username).add(new Account(getClient(username)));
+        Account newAccount = new Account(getClient(username));
+        accountsDirectoryPerUsername.get(username).add(newAccount);
+        accountsDirectoryPerAccountNumber.put(newAccount.getAccountNumber(), newAccount);
     }
 
-    public void addMoney(String username, String accountNumber, Double amount) {
+    public void startSession(String username, String password) {
         try {
             if(usernameChecked(username)) {
-                Account account = getAccountChecked(username, accountNumber);
-                account.addMoney(amount);
+                session = new Session(username, password, getClient(username));
             }
         }
-        catch(RuntimeException e) {
+        catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    public void withdraw(String username, String password, String accountNumber, Double amount) {
-        try {
-            if(usernameChecked(username) && userCredentialsChecked(username, password)) {
-                Account account = getAccountChecked(username, accountNumber);
-                account.withdraw(amount);
-            }
-        }
-        catch (RuntimeException e){
-            System.out.println(e.getMessage());
-        }
-
     }
 
     private boolean usernameChecked(String username) {
@@ -62,15 +53,38 @@ public class Bank {
         return true;
     }
 
-    private boolean userCredentialsChecked(String username, String password) {
-        if(! getClient(username).getPassword().equals(password)) {
-            throw new RuntimeException("Incorrect username or password.");
-        }
-        return true;
+    public void closeSession() {
+        session = null;
     }
 
+    public void addMoney(String accountNumber, Double amount) {
+        try {
+            if(session != null) {
+                Account account = getAccountChecked(session.getUsername(), accountNumber);
+                account.addMoney(amount);
+            }
+        }
+        catch(RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void withdraw(String accountNumber, Double amount) {
+        try {
+            if(session != null) {
+                Account account = getAccountChecked(session.getUsername(), accountNumber);
+                account.withdraw(amount);
+            }
+        }
+        catch (RuntimeException e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+
     private Account getAccountChecked(String username, String accountNumber) {
-        for(Account account : accountsDirectory.get(username)) {
+        for(Account account : accountsDirectoryPerUsername.get(username)) {
             if(account.getAccountNumber().equals(accountNumber) && accountOwnerChecked(account, username)) {
                 return account;
             }
@@ -82,6 +96,9 @@ public class Bank {
         return account.getOwner().getUsername().equals(username);
     }
 
+    public void transfer(String originAccountNumber, String receiverAccountNumber, Double amount) {
+
+    }
 
     public Client getClient(String username) {
         return clients.get(username);
@@ -109,8 +126,8 @@ public class Bank {
         this.clients = clients;
     }
 
-    public Map<String, List<Account>> getAccountsDirectory() {
-        return accountsDirectory;
+    public Map<String, List<Account>> getAccountsDirectoryPerUsername() {
+        return accountsDirectoryPerUsername;
     }
 
 
