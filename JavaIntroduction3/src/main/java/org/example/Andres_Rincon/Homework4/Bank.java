@@ -97,7 +97,16 @@ public class Bank {
     }
 
     public void transfer(String originAccountNumber, String receiverAccountNumber, Double amount) {
-
+        Account originAccount = accountsDirectoryPerAccountNumber.get(originAccountNumber);
+        Account receiverAccount = accountsDirectoryPerAccountNumber.get(receiverAccountNumber);
+        try {
+            originAccount.withdraw(amount);
+            receiverAccount.addMoney(amount);
+            System.out.println("Transferred with success.");
+        }
+        catch(RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Client getClient(String username) {
