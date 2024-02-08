@@ -1,6 +1,5 @@
-package org.example.Juan_David_Camacho2;
+package org.example.Juan_David_Camacho2.Homework_3;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 

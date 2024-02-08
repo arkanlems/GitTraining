@@ -1,8 +1,6 @@
-package org.example.Juan_David_Camacho2;
+package org.example.Juan_David_Camacho2.Homework_3;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Main {
