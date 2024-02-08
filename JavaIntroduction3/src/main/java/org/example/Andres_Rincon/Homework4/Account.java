@@ -25,6 +25,7 @@ public class Account {
     public void addMoney(Double amount) {
         if(amount > 0) {
             balance += amount;
+            System.out.println("Money added.");
         }
         else {
             throw new RuntimeException("Amount must be more than zero.");
@@ -32,11 +33,15 @@ public class Account {
     }
 
     public void withdraw(Double amount) {
+        if(amount <= 0) {
+            throw new RuntimeException("Amount must be positive.");
+        }
         if(balance >= amount) {
             balance -= amount;
+            System.out.println("Money withdrawn.");
         }
         else {
-            throw new RuntimeException("Insufficient funds");
+            throw new RuntimeException("Insufficient funds.");
         }
     }
 

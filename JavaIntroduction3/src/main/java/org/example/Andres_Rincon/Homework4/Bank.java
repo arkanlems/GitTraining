@@ -30,9 +30,21 @@ public class Bank {
         accountsDirectory.get(username).add(new Account(getClient(username)));
     }
 
+    public void addMoney(String username, String accountNumber, Double amount) {
+        try {
+            if(usernameChecked(username)) {
+                Account account = getAccountChecked(username, accountNumber);
+                account.addMoney(amount);
+            }
+        }
+        catch(RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void withdraw(String username, String password, String accountNumber, Double amount) {
         try {
-            if(userCredentialsChecked(username, password)) {
+            if(usernameChecked(username) && userCredentialsChecked(username, password)) {
                 Account account = getAccountChecked(username, accountNumber);
                 account.withdraw(amount);
             }
@@ -42,8 +54,16 @@ public class Bank {
         }
 
     }
+
+    private boolean usernameChecked(String username) {
+        if(getClient(username) == null) {
+            throw new RuntimeException("Non existent username");
+        }
+        return true;
+    }
+
     private boolean userCredentialsChecked(String username, String password) {
-        if((getClient(username) == null) || ! getClient(username).getPassword().equals(password)) {
+        if(! getClient(username).getPassword().equals(password)) {
             throw new RuntimeException("Incorrect username or password.");
         }
         return true;
