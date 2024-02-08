@@ -26,8 +26,40 @@ public class Bank {
         }
     }
 
-    public void createNewAccount(String username) {
+    public void addNewAccount(String username) {
         accountsDirectory.get(username).add(new Account(getClient(username)));
+    }
+
+    public void withdraw(String username, String password, String accountNumber, Double amount) {
+        try {
+            if(userCredentialsChecked(username, password)) {
+                Account account = getAccountChecked(username, accountNumber);
+                account.withdraw(amount);
+            }
+        }
+        catch (RuntimeException e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+    private boolean userCredentialsChecked(String username, String password) {
+        if((getClient(username) == null) || ! getClient(username).getPassword().equals(password)) {
+            throw new RuntimeException("Incorrect username or password.");
+        }
+        return true;
+    }
+
+    private Account getAccountChecked(String username, String accountNumber) {
+        for(Account account : accountsDirectory.get(username)) {
+            if(account.getAccountNumber().equals(accountNumber) && accountOwnerChecked(account, username)) {
+                return account;
+            }
+        }
+        throw new RuntimeException("Invalid account number entered.");
+    }
+
+    private boolean accountOwnerChecked(Account account, String username) {
+        return account.getOwner().getUsername().equals(username);
     }
 
 
