@@ -1,8 +1,5 @@
 package org.example.Diego_Molina.HomeWork4;
 
-import org.example.Diego_Molina.HomeWork3.Restaurant;
-import org.example.Diego_Molina.HomeWork3.Utils;
-
 public class Menu {
     public static void showOptions(){
         System.out.println("---------------------Welcome To GloBank--------------");
@@ -17,12 +14,11 @@ public class Menu {
 
         switch (option){
             case 1:{
-                Restaurant.addRecipe();
+                Bank.AddClient();
                 showOptions();
                 break;
             }
             case 2:{
-                Restaurant.replaceRecipeById();
                 showOptions();
                 break;
             }
