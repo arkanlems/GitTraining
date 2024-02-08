@@ -1,4 +1,4 @@
-package org.example.Juan_David_Camacho2.Homework_3;
+package org.example.Juan_David_Camacho.Homework_3;
 
 public class Plate {
 
