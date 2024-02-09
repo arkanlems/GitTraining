@@ -1,17 +1,17 @@
 package org.example.Maria_Paula_Gonzalez_Escallon.HW4;
 
 public class Account {
-    private Long accountNumber;
+    private int accountNumber;
     private String openingDate;
     private double balance;
 
-    public Account(String openingDate, Long accountNumber) {
+    public Account(String openingDate, int accountNumber) {
         this.accountNumber = accountNumber;
         this.openingDate = openingDate;
         this.balance = 0;
     }
 
-    public Long getAccountNumber() {
+    public int getAccountNumber() {
         return accountNumber;
     }
 
