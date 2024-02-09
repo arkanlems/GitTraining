@@ -1,20 +1,41 @@
 package org.example.Juan_Potes.Tarea4;
 
 import org.example.Juan_Potes.Tarea3.Recipe;
-import org.example.Juan_Potes.Tarea3.UserInput;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Bank {
     private List<Client> clients = new ArrayList<>();
-    private static long freeAccNumber = 2501234;
+    private static long freeAccNumber = 10;
 
     // Constructor
     public Bank(){}
 
     // Methods
-    public void executeOptions(){
+    public void executeBankOptions(){
+        int option = 0;
+        while(option != 4){
+            UserInput.showBankMenu();
+            option = UserInput.scanInt("Type an option from the menu: ",1,4);
+
+            switch(option){
+                case 1:
+                    showClientsInfo();
+                    break;
+                case 2:
+                    addClient();
+                    break;
+                case 3:
+                    deleteClient();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void executeUserOptions(){
 
     }
 
@@ -27,7 +48,7 @@ public class Bank {
     }
 
     public Account generateAccount(Client client){
-        
+
     }
 
 
@@ -40,6 +61,10 @@ public class Bank {
     }
 
     public int indexOf(String userName){
+
+    }
+
+    public void showClientsInfo(){
 
     }
 

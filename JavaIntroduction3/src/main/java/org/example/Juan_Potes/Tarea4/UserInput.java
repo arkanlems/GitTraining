@@ -5,60 +5,67 @@ import java.util.Scanner;
 public class UserInput {
     public static Date scanDate(){
         int year = scanYear(1980, 2024);
-        int month = scanMonth(year);
+        int month = scanMonth();
         int day = scanDay(month, year);
 
         return new Date(day, month, year);
     }
 
     private static int scanDay(int month, int year){
-        Scanner scan = new Scanner(System.in);
-        int day = 0;
         int[] maxDays = {31,28,31,30,31,30,31,31,30,31,30,31};
 
         if(month == 2 && Date.isLeapYear(year)){
             maxDays[1] = 29;
         }
 
-        while(day < 1 || day > maxDays[month-1]){
-            System.out.print("Please type the DAY of the date: ");
-            if(scan.hasNextInt()){
-                day = scan.nextInt();
-            }
-            if(day < 1 || day > maxDays[month-1]){
-                System.out.println("INVALID VALUE. (Type only a day between 1 and " + maxDays[month-1] + ").");
-            }
-        }
-        return day;
+        return scanInt("Please type the DAY of the date: ", 1, maxDays[month-1]);
     }
 
-    private static int scanMonth(int year){
-        Scanner scan = new Scanner(System.in);
-        int month = 0;
-        while(month < 1 || month > 12){
-            System.out.print("Please type the MONTH of the date: ");
-            if(scan.hasNextInt()){
-                month = scan.nextInt();
-            }
-            if(month < 1 || month > 12){
-                System.out.println("INVALID VALUE. (Type only a months between 1 and 12).");
-            }
-        }
-        return month;
+    private static int scanMonth(){
+        return scanInt("Please type the MONTH of the date: ", 1, 12);
     }
 
     private static int scanYear(int minYear, int maxYear){
+        return scanInt("Please type the YEAR of the date: ", minYear, maxYear);
+    }
+
+    public static int scanInt(String requestMessage, int minValue, int maxValue){
         Scanner scan = new Scanner(System.in);
-        int year = 0;
-        while(year < minYear || year > maxYear){
-            System.out.print("Please type the YEAR of the date: ");
-            if(scan.hasNextInt()){
-                year = scan.nextInt();
+
+        int number = minValue - 1;
+
+        do{
+            System.out.print("\n" + requestMessage);
+
+            if (scan.hasNextInt()){
+                number = scan.nextInt();
             }
-            if(year < minYear || year > maxYear){
-                System.out.println("INVALID VALUE. (Type only a year between " + minYear +" and " + maxYear + ").");
+
+            if(number < minValue || number > maxValue){
+                System.out.println("INVALID VALUE. (Type only a number between " + minValue +" and " + maxValue + ").");
             }
         }
-        return year;
+        while(number < minValue || number > maxValue);
+
+        return number;
+    }
+
+    public static void showAccessMenu(){
+        System.out.println("\n------------------------------------");
+        System.out.println("|          SELECT ACCESS           |");
+        System.out.println("|  1. Enter as Bank Admin.         |");
+        System.out.println("|  2. Enter as a Client.           |");
+        System.out.println("|  3. Exit.                        |");
+        System.out.println("------------------------------------");
+    }
+
+    public static void showBankMenu(){
+        System.out.println("\n------------------------------------");
+        System.out.println("|            BANK MENU             |");
+        System.out.println("|  1. Show all clients.            |");
+        System.out.println("|  2. Add a new client.            |");
+        System.out.println("|  3. Delete a client.             |");
+        System.out.println("|  4. Exit.                        |");
+        System.out.println("------------------------------------");
     }
 }
