@@ -84,3 +84,4 @@ class Bank {
         clients.add(new Client(username, password, new BankAccount(accountnumber, new Date(), 0)));
 
     }
+}
