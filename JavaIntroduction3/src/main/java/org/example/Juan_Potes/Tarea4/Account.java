@@ -4,5 +4,5 @@ public class Account {
     private Client client;
     private int number;
     private Date openingDate;
-
+    private double balance;
 }

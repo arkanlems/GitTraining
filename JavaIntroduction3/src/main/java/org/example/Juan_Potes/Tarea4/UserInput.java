@@ -23,7 +23,7 @@ public class UserInput {
         while(day < 1 || day > maxDays[month-1]){
             System.out.print("Please type the DAY of the date: ");
             if(scan.hasNextInt()){
-                month = scan.nextInt();
+                day = scan.nextInt();
             }
             if(day < 1 || day > maxDays[month-1]){
                 System.out.println("INVALID VALUE. (Type only a day between 1 and " + maxDays[month-1] + ").");
