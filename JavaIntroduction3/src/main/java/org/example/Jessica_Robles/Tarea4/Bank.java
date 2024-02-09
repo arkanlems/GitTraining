@@ -46,6 +46,17 @@ public class Bank {
         return users.get(user);
     }
 
+    // User logIn
+    public Client userLogIn(String username, String password){
+        Client client = users.get(username);
+        if (client != null){
+            if (!client.getPassword().equals(password)){
+                return null;
+            }
+        }
+        return client;
+    }
+
     // Register user
     
     

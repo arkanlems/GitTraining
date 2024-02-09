@@ -33,6 +33,7 @@ public class BankMenu {
                         listAllUsers();
                         break;
                     case 2: 
+                        enterAccount();
                         break;
                     case 3: 
                         break;
@@ -49,6 +50,30 @@ public class BankMenu {
     public static void listAllUsers() {
         System.out.println("\nUSUARIOS EN EL BANCO\n");
         bank.listUsers();
+    }
+    
+    // Enter to an account
+    public static void enterAccount(){
+        System.out.println("\nINGRESAR A MI CUENTA\n");
+
+        System.out.println("Ingrese su usuario:");
+        String username = scan.nextLine();
+
+        System.out.println("Ingrese la contraseña:");
+        String password = scan.nextLine();
+
+        Client client = bank.userLogIn(username, password);
+        if(client != null){
+            System.out.println("\nBienvenido "+client.getusername());
+            userMenu();
+        }
+        else{
+            System.out.println("\nUsuario o contraseña no validos");
+        }
+    }
+
+    public static void userMenu(){
+
     }
 
 
@@ -73,8 +98,6 @@ public class BankMenu {
         }
         
     }
-
-    // Enter to an account
     
     // Input verification
     public static boolean isAnOption(String option, String maxOption){
