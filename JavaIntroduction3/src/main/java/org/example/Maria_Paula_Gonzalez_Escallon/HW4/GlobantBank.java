@@ -99,7 +99,41 @@ public class GlobantBank {
                     }
                     break;
                 case "4":
+                    System.out.println("Please enter your username: ");
+                    username = scan.nextLine();
 
+                    System.out.println("Please enter a password: ");
+                    password = scan.nextLine();
+                    if(bank.isLoginValid(username,password)){
+                        user = bank.getUserByUsername(username);
+                        System.out.println("Please enter the account: ");
+                        String recipientAccountInput = scan.nextLine();
+                        int accountNumber = 0;
+                        if (recipientAccountInput.matches("^\\d+$")){
+                            accountNumber = Integer.parseInt(recipientAccountInput);
+                        } else {
+                            System.out.println("Invalid account. Please try again");
+                            break;
+                        }
+                        Account recipientAccount = bank.getAccountByNumber(accountNumber);
+                        if(recipientAccount!=null){
+                            System.out.println("Please enter the amount of money that you want to withdraw: ");
+                            String inputAmountWithdraw = scan.nextLine();
+                            if (inputAmountWithdraw.matches("^\\d+(\\.\\d+)?$")){
+                                amount = Double.parseDouble(inputAmountWithdraw);
+                            }else {
+                                System.out.println("Invalid amount of money. Please try again");
+                                break;
+                            }
+                            user.transfer(amount,recipientAccount);
+                        } else {
+                            System.out.println("Invalid account. Please try again");
+                            break;
+                        }
+                    } else {
+                        System.out.println("Invalid credentials. Please try again");
+                        break;
+                    }
                     break;
                 case "5":
                     break;
