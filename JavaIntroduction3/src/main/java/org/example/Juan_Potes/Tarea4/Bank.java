@@ -44,9 +44,11 @@ public class Bank {
         String password = UserInput.scanString("Please type the password for the new client:  ");
         long accNumber = getFreeAccNumber();
         Date openingDate = UserInput.scanDate();
-        double initialBalance = UserInput.scanMoney("Please type the initial balance for the client's account: ");
+        double initialBalance = 0;
 
         addClient(userName,password,accNumber,openingDate,initialBalance);
+
+        System.out.println("\nClient added successfully!");
     }
 
     public void addClient(String userName, String password, long accNumber ,Date openingDate, double initialBalance){
