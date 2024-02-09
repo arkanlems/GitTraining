@@ -20,6 +20,14 @@ public class Bank {
             System.out.println("- " + c.getUsername() + " Contraseña: " + c.getPassword() + " Cuenta " + c.getAccount());
         }
     }
+    public Client findClient(String username, String password){
+        for (Client client : clients){
+            if(client.getUsername().equals(username) && client.getPassword().equals(password)){
+                return client;
+            }
+        }
+        return null;
+    }
 
 
 }

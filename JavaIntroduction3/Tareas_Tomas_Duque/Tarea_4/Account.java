@@ -25,7 +25,7 @@ public class Account {
        double tax = amount < 1000 ? 200:200 + amount * 0.15;
        if (balance >= amount + tax && amount >= 1){
            balance -=(amount + tax);
-           System.out.println("Se retiraron " + (amount + tax) + " dolares correctamente. \n El nuevo saldo es de: " + balance );
+           System.out.println("Se retiraron " + amount + " dólares con unos intereses de " + tax + " correctamente. \nEl nuevo saldo es de: " + balance );
        }else{
            System.out.println("Fondos insuficientes.");
        }
@@ -46,6 +46,8 @@ public class Account {
        return balance;
    }
 
+
+   //Esto me lo dijo GPT :)
    @Override
    public String toString() {
         return "Número de Cuenta: " + accountNumber + ", Fecha de Apertura: " + openingDate + ", Saldo: " + balance;

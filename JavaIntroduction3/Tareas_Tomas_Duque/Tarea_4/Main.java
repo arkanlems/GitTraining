@@ -7,7 +7,7 @@ public class Main {
     public static void main(String [] args){
 
         Bank bank = new Bank();
-        bank.addClient(new Client("Usuario1", "Pass1", new Account("100000001", "2024-01-01", 1000.0) ));
+        bank.addClient(new Client("Usuario1", "Pass1", new Account("100000001", "2024-01-01", 1000.0)));
         bank.addClient(new Client("Usuario2", "Pass2", new Account("100000002", "2024-01-02", 2000.0)));
         bank.addClient(new Client("Usuario3", "Pass3", new Account("100000003", "2024-01-03", 3000.0)));
         bank.addClient(new Client("Usuario4", "Pass4", new Account("100000004", "2024-01-04", 4000.0)));
@@ -27,6 +27,25 @@ public class Main {
             case 1:
                 System.out.println("Clientes:");
                 bank.printClient();
+                break;
+            case 2:
+                System.out.println("Ingrese el nombre de usuario:");
+                String username = scan.nextLine();
+                System.out.println("Ingrese contraseña:");
+                String password = scan.nextLine();
+                Client client = bank.findClient(username,password);
+                if(client == null){
+                    System.out.println("El usuario no está registrado o la constraseña es incorrecta");
+                    break;
+                }
+
+                System.out.println("Cuanto desea retirar?");
+                double amount = scan.nextDouble();
+
+                client.getAccount().withdraw(amount);
+                break;
+
+
 
         }
     }
