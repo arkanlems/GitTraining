@@ -1,3 +1,5 @@
+package org.example.Luisa_Fuentes.Tarea4;
+
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -84,6 +86,8 @@ public class Main {
                 break;
             case 4:
                 System.exit(0);
+            default:
+            	System.exit(0);
         }
 
     }
@@ -94,7 +98,6 @@ public class Main {
         double cantidad_deposito = scan.nextDouble();
 
         banco.realizarDeposito(cliente_encontrado, cantidad_deposito);
-
 
     }
 
