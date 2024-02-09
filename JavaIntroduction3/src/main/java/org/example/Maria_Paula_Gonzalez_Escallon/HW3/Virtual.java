@@ -1,3 +1,4 @@
+package org.example.Maria_Paula_Gonzalez_Escallon.HW3;
 import java.util.Scanner;
 
 public class Virtual {

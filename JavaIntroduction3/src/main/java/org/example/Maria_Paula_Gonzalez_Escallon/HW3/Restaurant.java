@@ -1,3 +1,4 @@
+package org.example.Maria_Paula_Gonzalez_Escallon.HW3;
 public class Restaurant {
     private static String name = "JavaRestaurant";
     private static Menu menu = new Menu();

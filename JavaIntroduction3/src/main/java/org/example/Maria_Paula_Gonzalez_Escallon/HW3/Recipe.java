@@ -1,3 +1,4 @@
+package org.example.Maria_Paula_Gonzalez_Escallon.HW3;
 public class Recipe {
     private String name;
     private double price;
