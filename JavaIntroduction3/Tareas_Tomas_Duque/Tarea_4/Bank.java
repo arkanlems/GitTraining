@@ -14,7 +14,12 @@ public class Bank {
     public void addClient(Client client){
         clients.add(client);
     }
-    
+
+    public void printClient(){
+        for(Client c: clients){
+            System.out.println("- " + c.getUsername() + " Contraseña: " + c.getPassword() + " Cuenta " + c.getAccount());
+        }
+    }
 
 
 }

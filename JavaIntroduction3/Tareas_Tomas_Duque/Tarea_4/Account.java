@@ -46,4 +46,9 @@ public class Account {
        return balance;
    }
 
+   @Override
+   public String toString() {
+        return "Número de Cuenta: " + accountNumber + ", Fecha de Apertura: " + openingDate + ", Saldo: " + balance;
+    }
+
 }
