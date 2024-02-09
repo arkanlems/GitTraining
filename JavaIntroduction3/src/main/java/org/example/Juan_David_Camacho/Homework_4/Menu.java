@@ -1,6 +1,5 @@
 package org.example.Juan_David_Camacho.Homework_4;
 import java.util.Scanner;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Menu {
@@ -77,7 +76,7 @@ public class Menu {
                             "1. Add money to your account \n" +
                             "2. Withdraw money from yor account \n" +
                             "3. Transfer money to another bank account \n" +
-                            "4. Exit to main menu");
+                            "4. Logout and exit to main menu");
 
             Scanner input = new Scanner(System.in);
             selection = validateInt(input);
@@ -126,13 +125,11 @@ public class Menu {
 
             switch (selection) {
                 case 1:
-
                     printAllCients(userList);
-
                     break;
 
                 case 2:
-
+                    addClient(userList);
                     break;
 
                 case 3:
@@ -169,34 +166,24 @@ public class Menu {
                 "*/ Enter the amount of money to withdraw from your account: ($" + actualMoney + " available)");
         Scanner input = new Scanner(System.in);
         Double moneyToWithdraw = Double.valueOf(validateInt(input));
+        double tax = (moneyToWithdraw <= 1000) ? 2000 : ((15 * moneyToWithdraw) / (100)) + 200;
 
         if (moneyToWithdraw == 0) {
 
             System.out.println("- Incorrect input entered, you need to withdraw at least $1");
 
-        } else if (moneyToWithdraw <= actualMoney) {
+        } else if (moneyToWithdraw + tax <= actualMoney) {
 
-            if (moneyToWithdraw <= 1000) {
+            client.getAccount().withdraw(moneyToWithdraw + tax);
+            System.out.println(
+                    "+ $" + moneyToWithdraw
+                            + " were ucessfully withdrawn from your account.\n Your new total is : $"
+                            + client.getAccount().getBalance() + ", $" + tax + " were deducted in tax.");
 
-                client.getAccount().withdraw(moneyToWithdraw + 200);
-                System.out.println(
-                        "+ $" + moneyToWithdraw
-                                + " were ucessfully withdrawn from your account.\n Your new total is : $"
-                                + client.getAccount().getBalance() + ", $200 were deducted in tax.");
+        } else if (moneyToWithdraw + tax > actualMoney) {
 
-            } else if (moneyToWithdraw > 1000) {
-
-                double tax = ((15 * moneyToWithdraw) / (100)) + 200;
-                client.getAccount().withdraw(moneyToWithdraw + tax);
-                System.out.println(
-                        "+ $" + moneyToWithdraw
-                                + " were ucessfully withdrawn from your account.\n Your new total is : $"
-                                + client.getAccount().getBalance() + ", $" + tax + " were deducted in tax.");
-            }
-
-        } else if (moneyToWithdraw > actualMoney) {
-
-            System.out.println("- Incorrect amount entered, you can't withdraw more than your available balance");
+            System.out.println(
+                    "- Incorrect amount entered, you can't withdraw more than your available balance, take into account our tax policy.");
 
         }
 
@@ -233,7 +220,7 @@ public class Menu {
 
                     System.out.println("- Incorrect input entered, you need to transfer at least $1");
 
-                } else if (moneyToTransfer <= client.getAccount().getBalance()) {
+                } else if (moneyToTransfer + 100 <= client.getAccount().getBalance()) {
 
                     client.getAccount().withdraw(moneyToTransfer + 100);
                     accountToTransfer.addMoney(moneyToTransfer);
@@ -244,10 +231,11 @@ public class Menu {
                                     + ".\n Your new total is : $"
                                     + client.getAccount().getBalance() + ", $100 were deducted in tax.");
 
-                } else if (moneyToTransfer > client.getAccount().getBalance()) {
+                } else if (moneyToTransfer + 100 > client.getAccount().getBalance()) {
 
                     System.out
-                            .println("- Incorrect amount entered, you can't transfer more than your available balance");
+                            .println(
+                                    "- Incorrect amount entered, you can't transfer more than your available balance, take into account our tax policy.");
 
                 }
 
@@ -276,6 +264,23 @@ public class Menu {
                     + " | " + c.getValue().getAccount().getNumber());
 
         }
+
+    }
+
+    private static void addClient(Map<Integer, Client> userList) {
+
+        System.out.println("*/ Adding a new client \n" +
+                "Please enter the new clients user: ");
+
+        Scanner input = new Scanner(System.in);
+        String user = input.nextLine();
+
+        System.out.println("Now please tell the user to create his password: ");
+        String pwd = input.nextLine();
+
+        userList.put(userList.size() + 1, new Client(user, pwd, new SavingsAccount(userList.size() + 1, 0)));
+        System.out.println(
+                "+ Action Successfull! " + user + " was added correctly, their account numer is: " + userList.size());
 
     }
 
@@ -314,4 +319,3 @@ public class Menu {
     }
 
 }
-

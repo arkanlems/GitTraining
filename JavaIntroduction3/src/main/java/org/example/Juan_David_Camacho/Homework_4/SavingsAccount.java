@@ -1,15 +1,15 @@
 package org.example.Juan_David_Camacho.Homework_4;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class SavingsAccount {
 
     private int number;
-    private Date openingDate;
+    private LocalDate openingDate;
     private double balance;
 
-    public SavingsAccount(int number, Date openingDate, double balance) {
+    public SavingsAccount(int number, double balance) {
         this.number = number;
-        this.openingDate = openingDate;
+        this.openingDate = java.time.LocalDate.now();
         this.balance = balance;
     }
 
@@ -21,12 +21,8 @@ public class SavingsAccount {
         this.number = number;
     }
 
-    public Date getOpeningDate() {
+    public LocalDate getOpeningDate() {
         return this.openingDate;
-    }
-
-    public void setOpeningDate(Date openingDate) {
-        this.openingDate = openingDate;
     }
 
     public double getBalance() {
