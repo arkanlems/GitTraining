@@ -77,7 +77,26 @@ public class GlobantBank {
                     }
                     break;
                 case "3":
+                    System.out.println("Please enter your username: ");
+                    username = scan.nextLine();
 
+                    System.out.println("Please enter a password: ");
+                    password = scan.nextLine();
+                    if(bank.isLoginValid(username,password)){
+                        user = bank.getUserByUsername(username);
+                        System.out.println("Please enter the amount of money that you want to withdraw: ");
+                        String inputAmountWithdraw = scan.nextLine();
+                        if (inputAmountWithdraw.matches("^\\d+(\\.\\d+)?$")){
+                            amount = Double.parseDouble(inputAmountWithdraw);
+                        }else {
+                            System.out.println("Invalid amount of money. Please try again");
+                            break;
+                        }
+                        user.getAccount().withdraw(amount);
+                    } else {
+                        System.out.println("Invalid credentials. Please try again");
+                        break;
+                    }
                     break;
                 case "4":
 
