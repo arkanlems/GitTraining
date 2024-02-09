@@ -12,7 +12,7 @@ public class Account {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%-25s %-10f %-15s\n", uuid.toString(), balance, openingDate.toString()));
+        sb.append(String.format("%-25s %-10f %-15s", uuid.toString(), balance, openingDate.toString()));
         return sb.toString();
     }
 
