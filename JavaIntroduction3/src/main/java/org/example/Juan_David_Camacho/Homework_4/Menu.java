@@ -166,7 +166,7 @@ public class Menu {
                 "*/ Enter the amount of money to withdraw from your account: ($" + actualMoney + " available)");
         Scanner input = new Scanner(System.in);
         Double moneyToWithdraw = Double.valueOf(validateInt(input));
-        double tax = (moneyToWithdraw <= 1000) ? 2000 : ((15 * moneyToWithdraw) / (100)) + 200;
+        double tax = (moneyToWithdraw <= 1000) ? 200 : ((15 * moneyToWithdraw) / (100)) + 200;
 
         if (moneyToWithdraw == 0) {
 
