@@ -40,11 +40,27 @@ public class Bank {
     }
 
     public void addClient(){
+        String userName = UserInput.scanString("Please type the username of the new client:  ");
+        String password = UserInput.scanString("Please type the password for the new client:  ");
+        long accNumber = getFreeAccNumber();
+        Date openingDate = UserInput.scanDate();
+        double initialBalance = UserInput.scanMoney("Please type the initial balance for the client's account: ");
 
+        addClient(userName,password,accNumber,openingDate,initialBalance);
     }
 
-    public void addClient(String userName, String password){
+    public void addClient(String userName, String password, long accNumber ,Date openingDate, double initialBalance){
+        Client newClient = new Client(userName, password);
+        Account newAccount = new Account(newClient,accNumber,openingDate,initialBalance);
 
+        newClient.setAccount(newAccount);
+
+        this.clients.add(newClient);
+    }
+
+    public static long getFreeAccNumber(){
+        freeAccNumber++;
+        return freeAccNumber;
     }
 
     public Account generateAccount(Client client){
@@ -67,9 +83,9 @@ public class Bank {
     public void showClientsInfo(){
         if(this.clients.size() != 0){
             System.out.println("\n\tBANK CLIENTS");
-            System.out.println(String.format("%-20s %-20s %-10s %-20s", "USERNAME", "ACCOUNT NUMBER", "OPENING DATE", "BALANCE"));
+            System.out.println(String.format("%-20s %-20s %-20s %-20s", "USERNAME", "ACCOUNT NUMBER", "OPENING DATE", "BALANCE"));
             for (Client c : this.clients){
-                System.out.println(String.format("%-20s %-20s %-10s %-20s", c.getUserName(), c.getAccount().getAccNumber(), c.getAccount().getOpeningDate().getStringDate(), c.getAccount().getBalance()));
+                System.out.println(String.format("%-20s %-20s %-20s %-20s", c.getUserName(), c.getAccount().getAccNumber(), c.getAccount().getOpeningDate().getStringDate(), c.getAccount().getBalance()));
             }
         }
         else{

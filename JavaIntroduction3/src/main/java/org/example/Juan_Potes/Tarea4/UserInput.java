@@ -1,6 +1,8 @@
 package org.example.Juan_Potes.Tarea4;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserInput {
     public static Date scanDate(){
@@ -48,6 +50,54 @@ public class UserInput {
         while(number < minValue || number > maxValue);
 
         return number;
+    }
+
+    public static String scanString(String requestMessage){
+        Scanner scan = new Scanner(System.in);
+        Pattern pattern = Pattern.compile(".*[a-zA-Z]+.*");
+        String name = "";
+        Matcher matcher;
+        boolean matches = false;
+
+        while(!matches){
+            System.out.print("\n" + requestMessage);
+            name = scan.next();
+
+            matcher = pattern.matcher(name);
+
+            matches = matcher.matches();
+
+            if(!matches){
+                System.out.println("\nINVALID VALUE. Try again (The input must contain at least one letter).");
+            }
+        }
+
+        return name;
+    }
+
+    public static double scanMoney(String requestMessage){
+        Scanner scan = new Scanner(System.in);
+
+        double amount = 0.0;
+
+        boolean validInput = false;
+
+        while(!validInput){
+            System.out.print("\n" + requestMessage);
+
+            if (scan.hasNextDouble()){
+                amount = scan.nextDouble();
+                if(amount > 0){
+                    validInput = true;
+                }
+            }
+
+            if(!validInput){
+                System.out.println("\nINVALID VALUE. Try again (Write only positive numbers).");
+            }
+        }
+
+        return amount;
     }
 
     public static void showAccessMenu(){
