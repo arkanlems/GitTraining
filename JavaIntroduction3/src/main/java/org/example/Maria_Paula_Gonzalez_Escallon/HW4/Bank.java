@@ -42,4 +42,12 @@ public class Bank {
         }
         return null;
     }
+    public Account getAccountByNumber(int accountNumber) {
+        for (User user : users) {
+            if (user.getAccount().getAccountNumber() == accountNumber) {
+                return user.getAccount();
+            }
+        }
+        return null;
+    }
 }
