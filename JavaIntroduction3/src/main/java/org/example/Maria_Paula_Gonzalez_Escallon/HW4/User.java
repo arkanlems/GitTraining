@@ -22,4 +22,8 @@ public class User {
     public Account getAccount() {
         return account;
     }
+    public void transfer(double amount, Account recipientAccount) {
+        account.withdraw(amount + 100); // Tax for transfer
+        recipientAccount.deposit(amount);
+    }
 }
