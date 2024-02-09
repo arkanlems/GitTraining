@@ -136,6 +136,7 @@ public class GlobantBank {
                     }
                     break;
                 case "5":
+                    bank.printAllUsers();
                     break;
                 case "6":
                     running = false;
