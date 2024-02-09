@@ -23,13 +23,27 @@ public class Account {
 
    public void withdraw(double amount){
        double tax = amount < 1000 ? 200:200 + amount * 0.15;
-       if (balance >= amount + tax){
+       if (balance >= amount + tax && amount >= 1){
            balance -=(amount + tax);
            System.out.println("Se retiraron " + (amount + tax) + " dolares correctamente. \n El nuevo saldo es de: " + balance );
        }else{
            System.out.println("Fondos insuficientes.");
        }
    }
-   
+
+   public void transfer(double amount, Account recipientAccount){
+       double tax = 100.0;
+       if (balance >= amount + tax && amount >= 1){
+           balance -= (amount + tax);
+           recipientAccount.balance += amount;
+           System.out.println("Se transfirieron " + amount + " con una comisión de 100 dólares a la cuenta " + recipientAccount.accountNumber);
+       } else{
+           System.out.println("Fondos insuficientes.");
+       }
+   }
+
+   public double getBalance(){
+       return balance;
+   }
 
 }
