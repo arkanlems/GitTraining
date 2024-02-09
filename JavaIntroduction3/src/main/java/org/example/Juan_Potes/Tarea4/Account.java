@@ -12,4 +12,36 @@ public class Account {
         this.openingDate = openingDate;
         this.balance = balance;
     }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public long getAccNumber() {
+        return accNumber;
+    }
+
+    public void setAccNumber(long accNumber) {
+        this.accNumber = accNumber;
+    }
+
+    public Date getOpeningDate() {
+        return openingDate;
+    }
+
+    public void setOpeningDate(Date openingDate) {
+        this.openingDate = openingDate;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 }

@@ -12,6 +12,35 @@ public class Client {
         this.password = password;
     }
 
+    // Methods
+
+    public void showAccountInfo(){
+        System.out.println("Username: " + this.userName);
+        System.out.println("Account number: " + this.account.getAccNumber());
+        System.out.println("Account opening date: " + this.account.getOpeningDate().getStringDate());
+        System.out.println("Account balance: " + this.account.getBalance());
+    }
+
+    public void widthdrawMoney(){
+
+    }
+
+    public void widthdrawMoney(double amount){
+
+    }
+
+    public void addMoney(){
+
+    }
+
+    public void addMoney(double amount){
+
+    }
+
+    public void transferMoney(long accountNumber, double amount){
+
+    }
+
     // Getters and Setters
 
     public Account getAccount() {

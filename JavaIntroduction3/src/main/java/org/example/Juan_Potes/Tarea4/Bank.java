@@ -48,7 +48,7 @@ public class Bank {
     }
 
     public Account generateAccount(Client client){
-
+        return null;
     }
 
 
@@ -57,15 +57,28 @@ public class Bank {
     }
 
     public int indexOf(int accountNumber){
-
+        return -1;
     }
 
     public int indexOf(String userName){
-
+        return -1;
     }
 
     public void showClientsInfo(){
+        if(this.clients.size() != 0){
+            System.out.println("\n\tBANK CLIENTS");
+            System.out.println(String.format("%-20s %-20s %-10s %-20s", "USERNAME", "ACCOUNT NUMBER", "OPENING DATE", "BALANCE"));
+            for (Client c : this.clients){
+                System.out.println(String.format("%-20s %-20s %-10s %-20s", c.getUserName(), c.getAccount().getAccNumber(), c.getAccount().getOpeningDate().getStringDate(), c.getAccount().getBalance()));
+            }
+        }
+        else{
+            showNoClientsMessage();
+        }
+    }
 
+    public void showNoClientsMessage(){
+        System.out.println("\nCurrently the list of clients is empty");
     }
 
     // Getters and Setters
