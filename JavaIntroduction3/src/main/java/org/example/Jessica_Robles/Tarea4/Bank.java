@@ -1,7 +1,7 @@
 package org.example.Jessica_Robles.Tarea4;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class Bank {
     // Atributes
     static String name = "Globant Bank";
     private Map<String,Client> users = new HashMap<>(); //<Username, Client>
-    private List<String> users_names = new LinkedList<>();
+    private List<String> users_names = new ArrayList<>();
 
     // constructor
     public Bank() {
@@ -55,6 +55,21 @@ public class Bank {
             }
         }
         return client;
+    }
+
+    // Transfer
+    public byte transfer(String username, long accountNumber, double quantity, Account originAccount){
+        byte response = 0;
+        if (users.containsKey(username)){
+            Account transferedAccount = users.get(username).hasAccount(accountNumber);
+            if (transferedAccount != null){
+                response = 1;
+                if (originAccount.transfer(quantity, transferedAccount)){
+                    response = 2;
+                }
+            }
+        }
+        return response;
     }
 
     // Register user
