@@ -26,6 +26,9 @@ public class GlobantBank {
         }
         boolean running = true;
         while (running) {
+            String username;
+            String password;
+            User user;
 
             System.out.println("What option would you like to make today? (Please enter the corresponding number)" +
                     "\n 1. Create user" +
@@ -38,6 +41,17 @@ public class GlobantBank {
 
             switch (option) {
                 case "1":
+                    numAccount++;
+                    Account account = new Account( date, numAccount);
+
+                    System.out.println("Please enter a username: ");
+                    username = scan.nextLine();
+
+                    System.out.println("Please enter a password: ");
+                    password = scan.nextLine();
+
+                    user = new User(username, password, account);
+                    bank.addUser(user);
                     break;
                 case "2":
                     break;
