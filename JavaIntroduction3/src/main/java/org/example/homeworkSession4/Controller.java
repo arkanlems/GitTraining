@@ -104,8 +104,6 @@ public class Controller {
                     destinationAcc.setBalance(amount + destinationOldBalance);
 
                     System.out.println("Your new balance is: "+user.getAccount().getBalance());
-
-
                     break;
                 case 3:
                     System.out.print("Enter the amount of the transaction: ");
@@ -156,6 +154,8 @@ public class Controller {
         System.out.print("Password: ");
         String password = sc.nextLine();
         Account userAccount = createAccount();
+        System.out.println("Your new userId is: "+userId);
+        System.out.println("Your AccountNumber is: "+accNumber);
         return new User(userId, name, password, userAccount);
 
     }
