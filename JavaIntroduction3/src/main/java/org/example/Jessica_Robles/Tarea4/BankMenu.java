@@ -32,6 +32,7 @@ public class BankMenu {
                         enterAccount();
                         break;
                     case 3: 
+                        registerUser();
                         break;
                 }
             }
@@ -203,12 +204,11 @@ public class BankMenu {
         System.out.println("Ingrese la contraseña:");
         String password = scan.nextLine();
 
-        //TODO
-        if(true){
-            System.out.println("\nUsuario creado con esto");
+        if(bank.addUser(username, password)){
+            System.out.println("\nUsuario creado con exito");
         }
         else{
-            System.out.println("\nEl precio no es valido");
+            System.out.println("\nEl nombre de usuario ya existe");
         }
         
     }
