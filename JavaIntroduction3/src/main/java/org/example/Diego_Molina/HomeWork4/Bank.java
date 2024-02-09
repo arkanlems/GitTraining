@@ -3,13 +3,13 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Bank {
+
     private static String nameBank;
     private static ArrayList<Client> clientList;
-
     private static Map<String, Client> clients = new HashMap<>();
     private static Map<UUID, Account> accounts = new HashMap<>();
 
-    public static void AddClient(){
+    static void AddClient(){
         Client newClient = new Client();
         Account newAccount = new Account();
 
@@ -59,7 +59,18 @@ public class Bank {
     }
 
     public static void addMoney(UUID uuid){
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("                         Add money                         ");
+        System.out.println("-----------------------------------------------------------");
 
+        System.out.println("Amount");
+        int amount = Utils.readInteger();
+
+        if(amount>0){
+            Bank.getAccounts().get(uuid).setBalance(Bank.getAccounts().get(uuid).getBalance() + amount);
+        }else{
+            System.out.println("Wrong Value");
+        }
     }
 
     public static void showStateAccount(UUID uuid){

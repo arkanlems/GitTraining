@@ -1,9 +1,9 @@
 package org.example.Diego_Molina.HomeWork4;
-
 import java.util.UUID;
 
 public class Menu {
 
+    private Bank bank = new Bank();
     public static void showClientMenu(UUID uuid){
         System.out.println("---------------------Welcome To GloBank--------------");
         System.out.println("1. Add Money");
@@ -18,10 +18,15 @@ public class Menu {
         switch (option){
             case 1:{
                 Bank.addMoney(uuid);
+                Menu.showClientMenu(uuid);
                 break;
             }
             case 3:{
                 Bank.showStateAccount(uuid);
+                break;
+            } case 4:{
+                Menu.showOptions();
+                break;
             }
         }
     }
@@ -39,12 +44,11 @@ public class Menu {
         switch (option){
             case 1:{
                 Bank.AddClient();
-                showOptions();
+                Menu.showOptions();
                 break;
             }
             case 2:{
                 Bank.login();
-                showOptions();
                 break;
             }
             case 3: {
@@ -52,6 +56,7 @@ public class Menu {
                 showOptions();
             }
             case 4:{
+                System.exit(0);
                 break;
             }
             default:{
