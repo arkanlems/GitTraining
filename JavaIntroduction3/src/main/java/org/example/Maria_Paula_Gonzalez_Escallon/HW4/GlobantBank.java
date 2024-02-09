@@ -29,6 +29,7 @@ public class GlobantBank {
             String username;
             String password;
             User user;
+            double amount = 0;
 
             System.out.println("What option would you like to make today? (Please enter the corresponding number)" +
                     "\n 1. Create user" +
@@ -54,6 +55,26 @@ public class GlobantBank {
                     bank.addUser(user);
                     break;
                 case "2":
+                    System.out.println("Please enter your username: ");
+                    username = scan.nextLine();
+
+                    System.out.println("Please enter a password: ");
+                    password = scan.nextLine();
+                    if(bank.isLoginValid(username,password)){
+                        user = bank.getUserByUsername(username);
+                        System.out.println("Please enter the amount of money that you want to deposit: ");
+                        String inputAmountDeposit = scan.nextLine();
+                        if (inputAmountDeposit.matches("^\\d+(\\.\\d+)?$")){
+                            amount = Double.parseDouble(inputAmountDeposit);
+                        }else {
+                            System.out.println("Invalid amount of money. Please try again");
+                            break;
+                        }
+                        user.getAccount().deposit(amount);
+                    }else {
+                        System.out.println("Invalid credentials. Please try again");
+                        break;
+                    }
                     break;
                 case "3":
 
