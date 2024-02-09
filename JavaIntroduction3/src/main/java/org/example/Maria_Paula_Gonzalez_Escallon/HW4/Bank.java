@@ -13,4 +13,17 @@ public class Bank {
     public void addUser(User user) {
         users.add(user);
     }
+
+    public void printAllUsers() {
+        System.out.println("****************************************");
+        for (User user : users) {
+            System.out.println("Username: " + user.getUsername());
+            System.out.println("Account Number: " + user.getAccount().getAccountNumber());
+            System.out.println("Balance: " + user.getAccount().getBalance());
+            System.out.println("Opening Date: " + user.getAccount().getOpeningDate());
+            System.out.println();
+        }
+        System.out.println("****************************************");
+    }
+
 }
