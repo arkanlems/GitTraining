@@ -7,7 +7,7 @@ public class Client {
 
     // Constructors
 
-    public Client(int id, String userName, String password) {
+    public Client(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
