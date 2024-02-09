@@ -1,3 +1,5 @@
+package org.example.Jonathan_Lopez.HOMEWORK3;
+
 public class Recipe {
 
     private String name;
