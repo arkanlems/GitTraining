@@ -37,8 +37,10 @@ public class Client {
 
 
     // Add account
-    public void createAccount(double initialAmount){
-        this.accounts.add(new Account(initialAmount));
+    public Account createAccount(double initialAmount){
+        Account account = new Account(initialAmount);
+        this.accounts.add(account);
+        return account;
     }
     
     // Check if has account

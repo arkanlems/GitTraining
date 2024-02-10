@@ -76,17 +76,21 @@ public class BankMenu {
             System.out.println("Seleccione la accion que desea realizar:");
             System.out.println("1. Ver mis cuentas de banco");
             System.out.println("2. Realizar operacion sobre cuenta");
+            System.out.println("3. Crear nueva cuenta de banco");
             System.out.println("0. Salir de mi cuenta");
 
             option = scan.nextLine();
 
-            if (isAnOption(option, "2")){
+            if (isAnOption(option, "3")){
                 switch (Byte.parseByte(option)) {
                     case 1: 
                         client.showInfo();
                         break;
                     case 2: 
                         chooseAccount(client);
+                        break;
+                    case 3: 
+                        createAccount(client);
                         break;
                 }
             }
@@ -95,6 +99,18 @@ public class BankMenu {
             }
         }
 
+    }
+
+    public static void createAccount(Client client){
+        System.out.println("Ingrese el monto con el que se abre la cuenta:");
+        String amount = scan.nextLine();
+
+        if (isPrice(amount)){
+            client.createAccount(Double.parseDouble(amount)).showInfo();
+        }
+        else{
+            System.out.println("\nNo se ingreso un monto valido");
+        }
     }
 
 
@@ -155,6 +171,9 @@ public class BankMenu {
                 System.out.println("\nNo hay fondos suficientes\n");
             }
         }
+        else{
+            System.out.println("\nNo se ingresó un precio valido");
+        }
     }
 
     public static void addToAccount(Account account){
@@ -165,6 +184,9 @@ public class BankMenu {
             account.addMoney(Double.parseDouble(quantity));
             System.out.println("\nLa operacion se ha hecho exitosamente\n");
             account.showInfo();
+        }
+        else{
+            System.out.println("\nNo se ingresó un precio valido");
         }
     }
 
@@ -188,6 +210,9 @@ public class BankMenu {
             else{
                 System.out.println("\nNo se ha podido realizar la transferencia, revise que los datos sean correctos.\n");
             }
+        }
+        else{
+            System.out.println("\nNo se ingresaron valores validos");
         }
     }
 

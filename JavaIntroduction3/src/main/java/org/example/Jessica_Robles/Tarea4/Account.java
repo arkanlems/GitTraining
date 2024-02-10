@@ -27,6 +27,7 @@ public class Account {
     public void showInfo(){
         System.out.println("\tNumero de la cuenta: "+String.valueOf(accountNumber));
         System.out.println("\tBalance: "+String.valueOf(balance));
+        System.out.println("\tFecha de creacion: "+String.valueOf(oppeningDate));
         System.out.println();
     }
 
