@@ -28,6 +28,15 @@ public class Bank {
         }
         return null;
     }
+    public Client findClientByUsername(String username){
+        for (Client client : clients){
+            if(client.getUsername().equals(username)){
+                return client;
+            }
+        }
+        return null;
+    }
+
 
 
 }

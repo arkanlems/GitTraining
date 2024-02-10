@@ -15,7 +15,7 @@ public class Account {
    public void deposit(double amount){
        if(amount >= 1){
            balance += amount;
-           System.out.println("Se depositaron " + amount + " dolares correctamente.");
+           System.out.println("Se depositaron " + amount + " dolares correctamente.\nEl nuevo balance es de: " + balance);
        }else{
            System.out.println("¡El deposito tiene que ser mayor a 0!");
        }
@@ -41,6 +41,8 @@ public class Account {
            System.out.println("Fondos insuficientes.");
        }
    }
+
+
 
    public double getBalance(){
        return balance;
